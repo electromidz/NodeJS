@@ -5,4 +5,5 @@ var justNode = hello.slice(17);
 // console.log(__dirname);
 console.log(`Rock in World ${path.basename(__filename)}`);
 console.log('\n');
+console.log('test');
 // console.log(__filename);
