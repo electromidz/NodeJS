@@ -2,24 +2,24 @@
 const EventEmitter = require('events');
 const fs = require('fs');
 
-const myEmitter = new EventEmitter();
+const emitter = new EventEmitter();
 const data = 'Hello Omid';
 var number = 0;
 
 //############## EMITTERS ################################3
 
-myEmitter.on('less', () => {
+emitter.on('create', () => {
     fs.appendFile('omid.txt', data, function (err){
         if(err) throw err;
     });
     console.log('file created!');
 });
 
-myEmitter.on('more', () => {
+emitter.on('rename', () => {
     process.stdout.write('Your number in greater than 10....! \n');
 });
 
-myEmitter.on('unlink', () => {
+emitter.on('unlink', () => {
     fs.unlink('omid.txt', (err) => {
         if(err) throw err;
     });
@@ -32,13 +32,21 @@ process.stdout.write('start \n');
 process.stdout.write('let me one numer please from 1 tp 10 ? \n');
 
 process.stdin.on('data' , function(data) {
-    number = data;
-    if(number > 10 ){
-        myEmitter.emit('more');
-    } else if(number < 0 ){
-        myEmitter.emit('less');
-    } else if(number == 5 ){
-        myEmitter.emit('unlink');
+    process.stdout.write(data);
+    switch (data) {
+        case 1:
+            // emitter('create');
+            console.log('you seleceted 1');
+            break;
+        case 2:
+            emitter('rename');
+            break;
+        case 3:
+            emitter('unlink');
+            break;
+        default:
+            console.log('not done!');
+            break;
     }
     process.exit();
 });
